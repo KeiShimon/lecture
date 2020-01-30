@@ -1,3 +1,6 @@
+# 練習データ生成用スクリプト
+make_data.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
