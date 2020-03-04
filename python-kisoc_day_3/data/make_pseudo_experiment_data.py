@@ -65,20 +65,21 @@ def generate_keyboard_leftrights():
     return [random.choice(lr) for _ in range(NUM_YESNO)]
 
 # %%
-action = generate_action_types()
-category = generate_yesno_display_types()\
-    + generate_subjective_categories_with_number()
-answer = generate_keyboard_leftrights() + generate_subjective_answers()
 
-df = pd.DataFrame({
-    ACTION: action,
-    CATEGORY: category,
-    ANSWER: answer,
-})
+for id in range(20):
+    df_yn = pd.DataFrame({
+        ACTION: ['yesno'] * NUM_YESNO,
+        CATEGORY: generate_yesno_display_types(),
+        ANSWER: generate_keyboard_leftrights(),
+    })
 
-df
+    df_subjective = pd.DataFrame({
+        ACTION: ['subjective'] * NUM_SUBJECTIVE,
+        CATEGORY: generate_subjective_categories(),
+        ANSWER: generate_subjective_answers()
+    })
 
-# %%
-df.to_csv('03.csv', index=None)
+    pd.concat([df_yn, df_subjective], ignore_index=True)\
+        .to_csv('behavior_{}'.format(str(id).zfill(2)), index=None)
 
 # %%
